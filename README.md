@@ -2,16 +2,16 @@
 
 ## Languages
 
-2015: Haskell
-2016: Javascript
-2017: Closure
-2018: Haskell
-2019: Javascript
-2020: Gleam
-2021: Closure
-2022: Haskell
-2023: Javascript
-2024: Gleam
+- 2015: Haskell
+- 2016: Javascript
+- 2017: Closure
+- 2018: Haskell
+- 2019: Javascript
+- 2020: Gleam
+- 2021: Closure
+- 2022: Haskell
+- 2023: Javascript
+- 2024: Gleam
 
 ## Progress
 

@@ -1,5 +1,12 @@
 # Advent of Code
 
+## Auto download input
+
+Paste session id into aoc.sh
+Run `./aoc.sh year day lang` to download input file and create the source file
+
+e.g. `./aoc.sh 2023 01 js`
+
 ## Languages
 
 - 2015: Haskell

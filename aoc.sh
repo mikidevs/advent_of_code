@@ -7,8 +7,8 @@ LANG="${3}"
 
 DAY_NO_ZEROS="$(echo $DAY | sed 's/^0*//')"
 PUZZLE_URL="https://adventofcode.com/${YEAR}/day/${DAY_NO_ZEROS}/input"
-PUZZLE_FILE="${YEAR}/inputs/day${DAY}.txt"
-SRC="${YEAR}/src/day${DAY}.${LANG}"
+PUZZLE_FILE="aoc${YEAR}/inputs/day${DAY}.txt"
+SRC="aoc${YEAR}/src/day${DAY}.${LANG}"
 
 curl "${PUZZLE_URL}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${PUZZLE_FILE}"
 touch "${SRC}"

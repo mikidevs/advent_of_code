@@ -53,7 +53,7 @@ fn maybe_monotonic(ints: List(Int)) {
   |> list.any(fn(x) { x })
 }
 
-pub fn part01(input: String) {
+pub fn part1(input: String) {
   parse(input)
   |> list.map(fn(l) {
     list.map(l, fn(i) {
@@ -65,7 +65,7 @@ pub fn part01(input: String) {
   |> list.count(fn(x) { x == True })
 }
 
-pub fn part02(input: String) {
+pub fn part2(input: String) {
   parse(input)
   |> list.map(fn(l) {
     list.map(l, fn(i) {

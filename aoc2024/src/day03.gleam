@@ -3,7 +3,7 @@ import gleam/list
 import gleam/regexp
 import gleam/string
 
-pub fn part01(input: String) {
+pub fn part1(input: String) {
   let assert Ok(re) = regexp.from_string("mul\\(\\d{1,3},\\d{1,3}\\)")
   regexp.scan(re, input)
   |> list.map(fn(x) {
@@ -23,7 +23,7 @@ pub fn part01(input: String) {
   |> int.sum
 }
 
-pub fn part02(input: String) {
+pub fn part2(input: String) {
   let assert Ok(re) =
     regexp.from_string("don't|do|(mul\\(\\d{1,3},\\d{1,3}\\))")
 
@@ -46,7 +46,7 @@ pub fn part02(input: String) {
         _ -> {
           let #(f, s) = acc
           case s {
-            True -> #(f + part01(i), s)
+            True -> #(f + part1(i), s)
             False -> #(f, s)
           }
         }

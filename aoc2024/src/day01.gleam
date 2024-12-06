@@ -15,7 +15,7 @@ fn parse(input: String) {
   })
 }
 
-pub fn part01(input: String) {
+pub fn part1(input: String) {
   let assert [f, s] =
     parse(input)
     |> list.map(list.sort(_, int.compare))
@@ -24,7 +24,7 @@ pub fn part01(input: String) {
   |> int.sum
 }
 
-pub fn part02(input: String) {
+pub fn part2(input: String) {
   let assert [f, s] = parse(input)
   list.map(f, fn(a) { a * list.count(s, fn(b) { a == b }) })
   |> int.sum

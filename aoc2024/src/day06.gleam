@@ -1,9 +1,6 @@
 import gleam/bool
 import gleam/dict
-import gleam/int
-import gleam/io
 import gleam/list
-import gleam/order
 import gleam/string
 
 fn update_map(grid_dict) {
@@ -90,29 +87,29 @@ fn run_iters(grid_dict) {
   }
 }
 
-fn display_grid(grid_dict) {
-  grid_dict
-  |> dict.to_list
-  |> list.sort(fn(f, s) {
-    let #(#(x1, y1), _) = f
-    let #(#(x2, y2), _) = s
-    case int.compare(x1, x2) {
-      order.Eq -> int.compare(y1, y2)
-      other -> other
-    }
-  })
-  |> list.map(fn(x) {
-    let #(#(_, y), s) = x
-    case y == 129 {
-      True -> s <> "\n"
-      False -> s
-    }
-  })
-  |> string.concat
-  |> io.println
+// fn display_grid(grid_dict) {
+//   grid_dict
+//   |> dict.to_list
+//   |> list.sort(fn(f, s) {
+//     let #(#(x1, y1), _) = f
+//     let #(#(x2, y2), _) = s
+//     case int.compare(x1, x2) {
+//       order.Eq -> int.compare(y1, y2)
+//       other -> other
+//     }
+//   })
+//   |> list.map(fn(x) {
+//     let #(#(_, y), s) = x
+//     case y == 129 {
+//       True -> s <> "\n"
+//       False -> s
+//     }
+//   })
+//   |> string.concat
+//   |> io.println
 
-  grid_dict
-}
+//   grid_dict
+// }
 
 pub fn part1(input) {
   let grid =

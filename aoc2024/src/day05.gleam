@@ -1,41 +1,20 @@
 import gleam/bool
 import gleam/dict
+import gleam/int
 import gleam/io
 import gleam/list
+import gleam/order
+import gleam/result
 import gleam/set
 import gleam/string
 
-pub fn part1() {
-  let input =
-    "47|53
-97|13
-97|61
-97|47
-75|29
-61|13
-75|53
-29|13
-97|29
-53|29
-61|53
-97|53
-61|29
-47|13
-75|47
-97|75
-47|61
-75|61
-47|29
-75|13
-53|13
+fn sublist_of(subset: List(a), l1) {
+  subset
+  |> list.map(fn(x) { list.contains(l1, x) })
+  |> list.fold(True, bool.and)
+}
 
-75,47,61,53,29
-97,61,53,29,13
-75,29,13
-75,97,47,61,53
-61,13,29
-97,13,75,29,47
-"
+fn solve(input: String) {
   let #(rule_str, pages) =
     input
     |> string.split("\n")
@@ -53,21 +32,79 @@ pub fn part1() {
         let assert [_, second] = string.split(x, "|")
         second
       })
-      |> set.from_list
     })
-    |> io.debug
 
-  pages
-  |> list.drop(1)
-  |> list.take_while(fn(s) { s != "" })
-  |> list.map(fn(i) {
-    let sp = string.split(i, ",")
-    let parts =
+  let splits =
+    pages
+    |> list.drop(1)
+    |> list.take_while(fn(s) { s != "" })
+    |> list.map(string.split(_, ","))
+
+  let bools =
+    splits
+    |> list.map(fn(sp) {
       sp
-      |> list.map(fn(j) { list.split_while(sp, fn(x) { x != j }) })
-      |> list.map(fn(p) {
-        let #(first, second) = p
-        use <- bool.guard(list.is_empty(first), True)
+      |> list.map(fn(j) { list.drop_while(sp, fn(x) { x != j }) })
+      |> list.map(fn(l) {
+        case l {
+          [_] -> True
+          [x, ..xs] -> {
+            case dict.get(rules, x) {
+              Ok(val) -> xs |> sublist_of(val)
+              Error(_) -> False
+            }
+          }
+          [] -> False
+        }
       })
+      |> list.fold(True, bool.and)
+    })
+
+  #(rules, splits, bools)
+}
+
+pub fn part1(input: String) {
+  let #(_, splits, bools) = solve(input)
+
+  list.map2(splits, bools, fn(s, b) {
+    use <- bool.guard(!b, 0)
+    list.index_fold(s, 0, fn(acc, e, i) {
+      case i == { list.length(s) / 2 } {
+        True -> {
+          let assert Ok(int) = int.parse(e)
+          acc + int
+        }
+        False -> acc
+      }
+    })
   })
+  |> int.sum
+}
+
+pub fn part2(input: String) {
+  let #(rules, splits, bools) = solve(input)
+
+  list.map2(splits, bools, fn(s, b) {
+    use <- bool.guard(b, 0)
+    list.sort(s, fn(f, s) {
+      case dict.get(rules, f) {
+        Ok(values) ->
+          case [s] |> sublist_of(values) {
+            True -> order.Lt
+            False -> order.Gt
+          }
+        Error(_) -> order.Gt
+      }
+    })
+    |> list.index_fold(0, fn(acc, e, i) {
+      case i == { list.length(s) / 2 } {
+        True -> {
+          let assert Ok(int) = int.parse(e)
+          acc + int
+        }
+        False -> acc
+      }
+    })
+  })
+  |> int.sum
 }

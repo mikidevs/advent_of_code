@@ -1,11 +1,8 @@
 import gleam/bool
 import gleam/dict
 import gleam/int
-import gleam/io
 import gleam/list
 import gleam/order
-import gleam/result
-import gleam/set
 import gleam/string
 
 fn sublist_of(subset: List(a), l1) {

@@ -3,22 +3,9 @@
 ## Auto download input
 
 Paste session id into aoc.sh
-Run `./aoc.sh year day lang` to download input file and create the source file
+Run `./aoc.sh year day` to download input file and create the source file
 
-e.g. `./aoc.sh 2023 01 js`
-
-## Languages
-
-- 2015: ?
-- 2016: ?
-- 2017: ?
-- 2018: ?
-- 2019: ?
-- 2020: Zig
-- 2021: Closure
-- 2022: Haskell
-- 2023: Javascript
-- 2024: Gleam
+e.g. `./aoc.sh 2023 01`
 
 ## Progress
 

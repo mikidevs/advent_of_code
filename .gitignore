@@ -1,0 +1,5 @@
+*.beam
+*.ez
+/aoc2024_old
+erl_crash.dump
+*.js

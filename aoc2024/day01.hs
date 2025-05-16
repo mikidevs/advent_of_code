@@ -17,8 +17,9 @@ parse s =
 
 part1 :: ([Int], [Int]) -> Int
 part1 =
-  let diff (x, y) = abs (x - y) in
   sum . map diff . uncurry L.zip . bimap L.sort L.sort
+  where
+    diff (x, y) = abs (x - y)
 
 frequencies :: [Int] -> M.Map Int Int
 frequencies = L.foldl' insert M.empty

@@ -37,6 +37,5 @@ part2 p =
 main :: IO ()
 main = do
   input <- readFile "./inputs/day01.txt"
-  let parsed = parse input
   -- print $ part1 parsed
-  print $ part2 parsed
+  print $ part2 $ parse input

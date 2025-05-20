@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-AOC_SESSION_COOKIE="53616c7465645f5f09fcb32ec169da17b918747cf2cb60477ef182b42e2a28cdebe652e712860025daea33903e0ab526d1fd82cdceae60b444ae24775c9e077d"
+AOC_SESSION_COOKIE="53616c7465645f5f2ea166131175a4f6ed1de6ad4d5b314bae9b06d20ea7eb6cef73fd416b420a327223cfbe9d287ac52f0b69d3e0d2dbf1134546e531efd52b"
 YEAR="${1}"
 DAY="${2}"
 
@@ -10,4 +10,24 @@ PUZZLE_FILE="aoc${YEAR}/inputs/day${DAY}.txt"
 SRC="aoc${YEAR}/src/day${DAY}.hs"
 
 curl "${PUZZLE_URL}" -H "cookie: session=${AOC_SESSION_COOKIE}" -o "${PUZZLE_FILE}"
-touch "${SRC}"
+
+mkdir -p "$(dirname "$SRC")"
+
+cat > "$SRC" <<EOF
+module Day${DAY} where
+
+parse s =
+  error "Parser not implemented"
+
+part1 i =
+  error "Part 1 not implemented"
+
+part2 i =
+  error "Part 2 not implemented"
+
+main :: IO ()
+main = do
+  input <- readFile "./inputs/day${DAY}.txt"
+  print $ part1 $ parse input
+  -- print $ part2 $ parse input
+EOF

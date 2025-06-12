@@ -19,9 +19,8 @@ areas _ = error "found more than 3 measurements"
 volume :: Measurement -> Int
 volume = product . toList'
 
-parse s = s
-  & T.lines
-  & map (fromList' . T.split (=='x'))
+parse :: Text -> [Measurement]
+parse = map (fromList' . T.split (=='x')) . T.lines
 
 -- Surface area + minum area
 part1' :: Measurement -> Int

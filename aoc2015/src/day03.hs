@@ -16,7 +16,7 @@ shift d (x, y) =
     R -> (x + 1, y)
 
 flatCount :: CoordMap -> Int
-flatCount = sum . M.map S.size 
+flatCount = sum . M.map S.size
 
 parse :: String -> [Direction]
 parse =
@@ -35,11 +35,19 @@ part1' c (dir : xs) coordMap =
   let shifted@(x, y) = shift dir c in
     part1' shifted xs (M.insertWith S.union x (S.singleton y) coordMap)
 
-part2 i =
-  error "Part 2 not implemented"
+part2 :: [Direction] -> Int
+part2 ds = flatCount $ part2' (0, 0) (0, 0) ds (M.fromList [(0, S.singleton 0)])
+
+part2' :: Coord -> Coord -> [Direction] -> CoordMap -> CoordMap
+part2' _ _ [] coordMap = coordMap
+part2' c1 c2 (dir1 : dir2: xs) coordMap =
+  let shifted1@(x1,y1) = shift dir1 c1
+      shifted2@(x2,y2) = shift dir2 c2
+      ins x y = M.insertWith S.union x (S.singleton y) in
+        part2' shifted1 shifted2 xs (ins x2 y2 (ins x1 y1 coordMap))
 
 main :: IO ()
 main = do
   input <- readFile "./inputs/day03.txt"
-  print $ part1 $ parse input
-  -- print $ part1 $ parse ">v<<^>vv"
+  -- print $ part1 $ parse input
+  print $ part2 $ parse input
